@@ -3,6 +3,7 @@
 
 #include <Ogre.h>
 #include <OIS.h>
+#include <CEGUI.h>
 
 //интерфейс MouseListener
 class mouseListener : 	public OIS::MouseListener {
