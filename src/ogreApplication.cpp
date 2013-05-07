@@ -87,4 +87,10 @@ void ogreApplication::createScene() {
 	SceneNode* node1 = mSceneManager->getRootSceneNode()->createChildSceneNode( "Robot1Node", Vector3( 0, -30, 100 ) );
 	node1->yaw( Radian( Degree( -90 ) ) );
 	node1->attachObject( ent1 );
+    
+    //CEGUI::WindowManager &wmgr = CEGUI::WindowManager::getSingleton();
+    //CEGUI::Window *sheet = wmgr.createWindow("DefaultWindow", "CEGUIDemo/Sheet");
+    
+    CEGUI::Window *guiRoot = CEGUI::WindowManager::getSingleton().loadWindowLayout("TextDemo.layout"); 
+    CEGUI::System::getSingleton().setGUISheet(guiRoot);
 }
