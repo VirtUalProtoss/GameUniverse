@@ -34,10 +34,36 @@ frameListener::frameListener( RenderWindow* win ): mWindow( win ), mInputManager
 
     mKeyboard->setEventCallback( this );
     mMouse->setEventCallback( this );
+    
+ 
+    //Set initial mouse clipping size
+    windowResized(mWindow);
+ 
+    //Register as a Window listener
+    mEventLst = new myWindowEventListener();
+    Ogre::WindowEventUtilities::addWindowEventListener(mWindow, mEventLst);
+    mShutDown = false;
 }
 
 bool frameListener::frameStarted( const FrameEvent& evt ) {
 	return ( keyListener::frameStarted( evt ) && mouseListener::frameStarted( evt ) );
+}
+
+bool frameListener::frameRenderingQueued(const Ogre::FrameEvent& evt) {
+    if(mWindow->isClosed())
+        return false;
+ 
+    if(mShutDown)
+        return false;
+ 
+    //Need to capture/update each device
+    mKeyboard->capture();
+    mMouse->capture();
+ 
+    //Need to inject timestamps to CEGUI System.
+    CEGUI::System::getSingleton().injectTimePulse(evt.timeSinceLastFrame);
+ 
+    return true;
 }
 
 //Adjust mouse clipping area
