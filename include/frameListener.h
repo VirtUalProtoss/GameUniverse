@@ -10,11 +10,13 @@
 #include "keyListener.h"
 #include "mouseListener.h"
 #include "joyListener.h"
+#include "myWindowEventListener.h"
 
 
 class frameListener : public Ogre::FrameListener, public keyListener, public mouseListener, public joyListener {
     public:
         frameListener( Ogre::RenderWindow* win );
+        bool frameRenderingQueued(const Ogre::FrameEvent& evt);
         bool frameStarted( const Ogre::FrameEvent& evt );
         void windowResized( Ogre::RenderWindow* rw );
         void windowClosed( Ogre::RenderWindow* rw );
@@ -24,6 +26,9 @@ class frameListener : public Ogre::FrameListener, public keyListener, public mou
         Ogre::RenderWindow* mWindow;
 
         OIS::InputManager* mInputManager;
+        
+        myWindowEventListener* mEventLst;
+        bool mShutDown;
 };
 
 #endif // _FRAME_LISTENER_
