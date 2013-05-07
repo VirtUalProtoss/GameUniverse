@@ -40,6 +40,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/src/keyListener.o \
 	${OBJECTDIR}/src/main.o \
 	${OBJECTDIR}/src/mouseListener.o \
+	${OBJECTDIR}/src/myWindowEventListener.o \
 	${OBJECTDIR}/src/ogreApplication.o
 
 
@@ -93,6 +94,11 @@ ${OBJECTDIR}/src/mouseListener.o: src/mouseListener.cpp
 	${MKDIR} -p ${OBJECTDIR}/src
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -Iinclude -I../GameCommon/include -I/usr/include/OGRE -I/usr/include/OIS -I/usr/include/CEGUI -I/usr/include/CEGUI/RendererModules/Ogre -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/mouseListener.o src/mouseListener.cpp
+
+${OBJECTDIR}/src/myWindowEventListener.o: src/myWindowEventListener.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -Iinclude -I../GameCommon/include -I/usr/include/OGRE -I/usr/include/OIS -I/usr/include/CEGUI -I/usr/include/CEGUI/RendererModules/Ogre -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/myWindowEventListener.o src/myWindowEventListener.cpp
 
 ${OBJECTDIR}/src/ogreApplication.o: src/ogreApplication.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src
