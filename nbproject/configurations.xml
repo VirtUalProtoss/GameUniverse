@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configurationDescriptor version="88">
+  <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
+    <logicalFolder name="SourceFiles"
+                   displayName="Исходные файлы"
+                   projectFiles="true">
+      <itemPath>src/frameListener.cpp</itemPath>
+      <itemPath>src/joyListener.cpp</itemPath>
+      <itemPath>src/keyListener.cpp</itemPath>
+      <itemPath>src/main.cpp</itemPath>
+      <itemPath>src/mouseListener.cpp</itemPath>
+      <itemPath>src/ogreApplication.cpp</itemPath>
+    </logicalFolder>
+    <logicalFolder name="HeaderFiles"
+                   displayName="Файлы заголовков"
+                   projectFiles="true">
+      <itemPath>include/frameListener.h</itemPath>
+      <itemPath>include/joyListener.h</itemPath>
+      <itemPath>include/keyListener.h</itemPath>
+      <itemPath>include/mouseListener.h</itemPath>
+      <itemPath>include/ogreApplication.h</itemPath>
+    </logicalFolder>
+    <logicalFolder name="ResourceFiles"
+                   displayName="Файлы ресурсов"
+                   projectFiles="true">
+    </logicalFolder>
+    <logicalFolder name="TestFiles"
+                   displayName="Файлы тестов"
+                   projectFiles="false"
+                   kind="TEST_LOGICAL_FOLDER">
+    </logicalFolder>
+    <logicalFolder name="ExternalFiles"
+                   displayName="Важные файлы"
+                   projectFiles="false"
+                   kind="IMPORTANT_FILES_FOLDER">
+      <itemPath>Makefile</itemPath>
+    </logicalFolder>
+  </logicalFolder>
+  <projectmakefile>Makefile</projectmakefile>
+  <confs>
+    <conf name="Debug" type="1">
+      <toolsSet>
+        <remote-sources-mode>LOCAL_SOURCES</remote-sources-mode>
+        <compilerSet>default</compilerSet>
+      </toolsSet>
+      <compileType>
+        <cTool>
+          <incDir>
+            <pElem>include</pElem>
+            <pElem>../GameCommon/include</pElem>
+          </incDir>
+        </cTool>
+        <ccTool>
+          <incDir>
+            <pElem>include</pElem>
+            <pElem>../GameCommon/include</pElem>
+            <pElem>/usr/include/OGRE</pElem>
+            <pElem>/usr/include/OIS</pElem>
+            <pElem>/usr/include/CEGUI</pElem>
+            <pElem>/usr/include/CEGUI/RendererModules/Ogre</pElem>
+          </incDir>
+        </ccTool>
+        <linkerTool>
+          <output>../bin/graphicsclient_${CND_CONF}</output>
+          <linkerAddLib>
+            <pElem>/usr/lib/OGRE</pElem>
+          </linkerAddLib>
+          <linkerDynSerch>
+            <pElem>/usr/lib/OGRE</pElem>
+            <pElem>../lib</pElem>
+          </linkerDynSerch>
+          <linkerLibItems>
+            <linkerLibLibItem>CEGUIBase</linkerLibLibItem>
+            <linkerLibLibItem>OgreMain</linkerLibLibItem>
+            <linkerLibLibItem>OIS</linkerLibLibItem>
+            <linkerLibProjectItem>
+              <makeArtifact PL="../GameCommon"
+                            CT="2"
+                            CN="Debug"
+                            AC="true"
+                            BL="true"
+                            WD="../GameCommon"
+                            BC="${MAKE}  -f Makefile CONF=Debug"
+                            CC="${MAKE}  -f Makefile CONF=Debug clean"
+                            OP="../lib/libGameCommon_${CND_CONF}.${CND_DLIB_EXT}">
+              </makeArtifact>
+            </linkerLibProjectItem>
+            <linkerLibLibItem>CEGUIOgreRenderer</linkerLibLibItem>
+          </linkerLibItems>
+        </linkerTool>
+        <requiredProjects>
+          <makeArtifact PL="../GameCommon"
+                        CT="2"
+                        CN="Debug"
+                        AC="true"
+                        BL="false"
+                        WD="../GameCommon"
+                        BC="${MAKE}  -f Makefile CONF=Debug"
+                        CC="${MAKE}  -f Makefile CONF=Debug clean"
+                        OP="${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libGameCommon.${CND_DLIB_EXT}">
+          </makeArtifact>
+        </requiredProjects>
+      </compileType>
+      <item path="include/frameListener.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/joyListener.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/keyListener.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/mouseListener.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/ogreApplication.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/frameListener.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/joyListener.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/keyListener.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/main.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/mouseListener.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/ogreApplication.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+    </conf>
+    <conf name="Release" type="1">
+      <toolsSet>
+        <remote-sources-mode>LOCAL_SOURCES</remote-sources-mode>
+        <compilerSet>default</compilerSet>
+      </toolsSet>
+      <compileType>
+        <cTool>
+          <developmentMode>5</developmentMode>
+          <incDir>
+            <pElem>include</pElem>
+            <pElem>../GameCommon/include</pElem>
+          </incDir>
+        </cTool>
+        <ccTool>
+          <developmentMode>5</developmentMode>
+          <incDir>
+            <pElem>include</pElem>
+            <pElem>../GameCommon/include</pElem>
+            <pElem>/usr/include/OGRE</pElem>
+            <pElem>/usr/include/OIS</pElem>
+            <pElem>/usr/include/CEGUI</pElem>
+            <pElem>/usr/include/CEGUI/RendererModules/Ogre</pElem>
+          </incDir>
+        </ccTool>
+        <fortranCompilerTool>
+          <developmentMode>5</developmentMode>
+        </fortranCompilerTool>
+        <asmTool>
+          <developmentMode>5</developmentMode>
+        </asmTool>
+        <linkerTool>
+          <output>../bin/graphicsclient_${CND_CONF}</output>
+          <linkerAddLib>
+            <pElem>/usr/lib/OGRE</pElem>
+          </linkerAddLib>
+          <linkerDynSerch>
+            <pElem>/usr/lib/OGRE</pElem>
+            <pElem>../lib</pElem>
+          </linkerDynSerch>
+          <linkerLibItems>
+            <linkerLibLibItem>CEGUIBase</linkerLibLibItem>
+            <linkerLibLibItem>OgreMain</linkerLibLibItem>
+            <linkerLibLibItem>OIS</linkerLibLibItem>
+            <linkerLibProjectItem>
+              <makeArtifact PL="../GameCommon"
+                            CT="2"
+                            CN="Debug"
+                            AC="true"
+                            BL="true"
+                            WD="../GameCommon"
+                            BC="${MAKE}  -f Makefile CONF=Debug"
+                            CC="${MAKE}  -f Makefile CONF=Debug clean"
+                            OP="../lib/libGameCommon_${CND_CONF}.${CND_DLIB_EXT}">
+              </makeArtifact>
+            </linkerLibProjectItem>
+            <linkerLibLibItem>CEGUIOgreRenderer</linkerLibLibItem>
+          </linkerLibItems>
+        </linkerTool>
+        <requiredProjects>
+          <makeArtifact PL="../GameCommon"
+                        CT="2"
+                        CN="Debug"
+                        AC="true"
+                        BL="false"
+                        WD="../GameCommon"
+                        BC="${MAKE}  -f Makefile CONF=Debug"
+                        CC="${MAKE}  -f Makefile CONF=Debug clean"
+                        OP="${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libGameCommon.${CND_DLIB_EXT}">
+          </makeArtifact>
+        </requiredProjects>
+      </compileType>
+      <item path="include/frameListener.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/joyListener.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/keyListener.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/mouseListener.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/ogreApplication.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/frameListener.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/joyListener.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/keyListener.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/main.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/mouseListener.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/ogreApplication.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+    </conf>
+  </confs>
+</configurationDescriptor>
