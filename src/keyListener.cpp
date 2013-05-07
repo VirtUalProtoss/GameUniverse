@@ -16,12 +16,16 @@ bool keyListener::keyPressed( const KeyEvent &e ) {
 		LogManager::getSingleton().logMessage( "*** ESC: shutdown ***" );
 		mEscWasPressed = true;
 	}
+    CEGUI::System &sys = CEGUI::System::getSingleton();
+    sys.injectKeyDown(e.key);
+    sys.injectChar(e.text);
 	return true;
 }
 
 bool keyListener::keyReleased( const KeyEvent &e ) {
 	//клавиша отпущена
 	LogManager::getSingleton().logMessage( "key's been released" );
+    CEGUI::System::getSingleton().injectKeyUp(e.key);
 	return true;
 }
 
