@@ -3,6 +3,7 @@
 
 #include <Ogre.h>
 #include <OIS.h>
+#include <CEGUI.h>
 
 //интерфейс KeyListener
 class keyListener : public OIS::KeyListener {
