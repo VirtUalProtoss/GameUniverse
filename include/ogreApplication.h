@@ -14,10 +14,12 @@ class ogreApplication {
 		bool loadConfig();
 		void loadResources();
 		void initialise();
+        void initCEGUI();
 		int run();
 		void createScene();
+        void createCamera();
+
 		Root* mOgre;
-		//EventProcessor* m_EventProcessor;
 		SceneManager* mSceneManager;
 		Camera* mCamera;
 		Viewport* mViewport;

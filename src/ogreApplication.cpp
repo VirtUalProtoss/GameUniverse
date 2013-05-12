@@ -6,7 +6,7 @@ ogreApplication::ogreApplication() {
 	loadConfig();
 	loadResources();
 
-	mWindow = mOgre->initialise( true,"Application" );
+	mWindow = mOgre->initialise( true, "Application" );
 	createScene();
 	initialise();
 	//mOgre->startRendering();
@@ -52,7 +52,7 @@ void ogreApplication::initialise() {
 	mViewport->setBackgroundColour( ColourValue( 0.0f, 0.0f, 0.0f ) );
 	mCamera->setAspectRatio( Real( mViewport->getActualWidth() ) / Real( mViewport->getActualHeight() ) );
 
-	mFrameLst = new frameListener( mWindow );
+	mFrameLst = new frameListener( mWindow, mCamera );
 	mOgre->addFrameListener( mFrameLst );
 }
 
@@ -62,14 +62,21 @@ int ogreApplication::run() {
 }
 
 void ogreApplication::createScene() {
-	mSceneManager = mOgre->createSceneManager( ST_GENERIC,"sceneManager" );
+	mSceneManager = mOgre->createSceneManager( ST_GENERIC, "sceneManager" );
 	mSceneManager->setAmbientLight( ColourValue( 1, 1, 1 ) );
-	mCamera = mSceneManager->createCamera( "Camera" );
-	mCamera->setPosition( Vector3( 0.0f, 0.0f, 500.0f ) );
-	mCamera->lookAt( Vector3( 0.0f, 0.0f, 0.0f ) );
-	mCamera->setNearClipDistance( 5.0f );
-	mCamera->setFarClipDistance( 5000.0f );
+	createCamera();
 
+    initCEGUI();
+
+    //mSceneManager->setWorldGeometry("terrain.cfg");
+    
+	Entity *ent1 = mSceneManager->createEntity( "Robot1", "robot.mesh" );
+	SceneNode* node1 = mSceneManager->getRootSceneNode()->createChildSceneNode( "Robot1Node", Vector3( 0, -30, 100 ) );
+	node1->yaw( Radian( Degree( -90 ) ) );
+	node1->attachObject( ent1 );
+}
+
+void ogreApplication::initCEGUI() {
     LogManager::getSingletonPtr()->logMessage( "*** Initializing CEGUI ***" );
 	myRenderer = &CEGUI::OgreRenderer::bootstrapSystem();
 
@@ -81,16 +88,16 @@ void ogreApplication::createScene() {
 
 	CEGUI::SchemeManager::getSingleton().create("TaharezLook.scheme");
 	CEGUI::System::getSingleton().setDefaultMouseCursor("TaharezLook", "MouseArrow");
-
-
-	Entity *ent1 = mSceneManager->createEntity( "Robot1", "robot.mesh" );
-	SceneNode* node1 = mSceneManager->getRootSceneNode()->createChildSceneNode( "Robot1Node", Vector3( 0, -30, 100 ) );
-	node1->yaw( Radian( Degree( -90 ) ) );
-	node1->attachObject( ent1 );
     
-    //CEGUI::WindowManager &wmgr = CEGUI::WindowManager::getSingleton();
-    //CEGUI::Window *sheet = wmgr.createWindow("DefaultWindow", "CEGUIDemo/Sheet");
-    
-    CEGUI::Window *guiRoot = CEGUI::WindowManager::getSingleton().loadWindowLayout("TextDemo.layout"); 
-    CEGUI::System::getSingleton().setGUISheet(guiRoot);
+    // Demo layout
+    //CEGUI::Window *guiRoot = CEGUI::WindowManager::getSingleton().loadWindowLayout("TextDemo.layout"); 
+    //CEGUI::System::getSingleton().setGUISheet(guiRoot);
+}
+
+void ogreApplication::createCamera(void) {
+    mCamera = mSceneManager->createCamera( "Camera" );
+	mCamera->setPosition( Vector3( 0.0f, 0.0f, 500.0f ) );
+	mCamera->lookAt( Vector3( 0.0f, 0.0f, 0.0f ) );
+	mCamera->setNearClipDistance( 5.0f );
+	mCamera->setFarClipDistance( 5000.0f );
 }

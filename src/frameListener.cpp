@@ -4,7 +4,7 @@ using namespace Ogre;
 using namespace std;
 using namespace CEGUI;
 
-frameListener::frameListener( RenderWindow* win ): mWindow( win ), mInputManager( 0 ) {
+frameListener::frameListener( RenderWindow* win, Ogre::Camera* cam ): mWindow( win ), mInputManager( 0 ) {
     mTime = 0;
     LogManager::getSingletonPtr()->logMessage( "*** Initializing OIS ***" );
 
@@ -22,7 +22,9 @@ frameListener::frameListener( RenderWindow* win ): mWindow( win ), mInputManager
     //Создание мыши, клавиатуры
     mKeyboard = static_cast<OIS::Keyboard*>( mInputManager->createInputObject( OIS::OISKeyboard, true ) );
     mMouse = static_cast<OIS::Mouse*>( mInputManager->createInputObject( OIS::OISMouse, true ) );
-
+    mKeyboard->setBuffered(true);
+    mMouse->setBuffered(true);
+    
     int mWidth = mWindow->getWidth();
     int mHeight = mWindow->getHeight();
 
@@ -43,10 +45,19 @@ frameListener::frameListener( RenderWindow* win ): mWindow( win ), mInputManager
     mEventLst = new myWindowEventListener();
     Ogre::WindowEventUtilities::addWindowEventListener(mWindow, mEventLst);
     mShutDown = false;
+    mCamera = cam;
+    mTimeUntilNextToggle = 0;
+}
+
+frameListener::~frameListener() {
+    //Remove ourself as a Window listener
+	WindowEventUtilities::removeWindowEventListener(mWindow, mEventLst);
+	windowClosed(mWindow);
 }
 
 bool frameListener::frameStarted( const FrameEvent& evt ) {
-	return ( keyListener::frameStarted( evt ) && mouseListener::frameStarted( evt ) );
+	return true;
+    //( keyListener::frameStarted( evt ) && mouseListener::frameStarted( evt ) );
 }
 
 bool frameListener::frameRenderingQueued(const Ogre::FrameEvent& evt) {
@@ -62,6 +73,28 @@ bool frameListener::frameRenderingQueued(const Ogre::FrameEvent& evt) {
  
     //Need to inject timestamps to CEGUI System.
     CEGUI::System::getSingleton().injectTimePulse(evt.timeSinceLastFrame);
+    
+    Ogre::Vector3 lastMotion = mCameraTranslateVector;
+
+    // ramp up / ramp down speed
+    if ( mCameraTranslateVector == Ogre::Vector3::ZERO ) {
+        // decay (one third speed)
+        mCurrentSpeed -= evt.timeSinceLastFrame * 0.3;
+        mCameraTranslateVector = lastMotion;
+    } else {
+        // ramp up
+        mCurrentSpeed += evt.timeSinceLastFrame;
+    }
+
+    // Limit motion speed
+    if (mCurrentSpeed > 1.0)
+        mCurrentSpeed = 1.0;
+    if (mCurrentSpeed < 0.0)
+        mCurrentSpeed = 0.0;
+
+    mCameraTranslateVector *= mCurrentSpeed;
+        
+    moveCamera();
  
     return true;
 }
@@ -92,4 +125,16 @@ void frameListener::windowClosed( RenderWindow* rw ) {
             mInputManager = 0;
         }
     }
+}
+
+void frameListener::moveCamera() {
+    mCameraTranslateVector = Ogre::Vector3::ZERO;
+    mCameraTranslateVector.x = mSideMoving;
+    mCameraTranslateVector.y = mTopMoving;
+    mCameraTranslateVector.z = mFrontMoving;
+    mCamera->yaw(mCameraRotX);
+    mCamera->pitch(mCameraRotY);
+    mCamera->moveRelative(mCameraTranslateVector);
+    mCameraRotX = 0;
+    mCameraRotY = 0;
 }

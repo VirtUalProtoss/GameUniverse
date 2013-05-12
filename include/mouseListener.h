@@ -13,8 +13,11 @@ class mouseListener : 	public OIS::MouseListener {
 		virtual bool mouseReleased( const OIS::MouseEvent &e, OIS::MouseButtonID id );
 		virtual bool mouseMoved( const OIS::MouseEvent &e );
 		virtual bool frameStarted( const Ogre::FrameEvent& evt );
+ 
 	protected:
 		OIS::Mouse* mMouse;
+        Ogre::Radian mCameraRotX;
+        Ogre::Radian mCameraRotY;
 };
 
 #endif // MOUSELISTENER_H
