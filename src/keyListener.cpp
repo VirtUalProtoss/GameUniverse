@@ -9,7 +9,7 @@ keyListener::keyListener() : mEscWasPressed( false ) {
     mCameraTranslateVector = Ogre::Vector3::ZERO;
     mRotScale = 0.0f;
     mCameraYaw = 0.0f;
-    mMoveScale = 10;
+    mMoveScale = 1000;
     mFrontMoving = 0.0f;
     mSideMoving = 0.0f;
     mTopMoving = 0.0f;
@@ -29,7 +29,7 @@ bool keyListener::keyPressed( const KeyEvent &e ) {
 	}
     
     if ( e.key == OIS::KC_LSHIFT )
-        mMoveScale *= 10;
+        mMoveScale *= 1000;
 
     if ( e.key == OIS::KC_A )
         mSideMoving = -mMoveScale;	// Move camera left
@@ -63,7 +63,7 @@ bool keyListener::keyReleased( const KeyEvent &e ) {
     CEGUI::System::getSingleton().injectKeyUp(e.key);
     
     if ( e.key == OIS::KC_LSHIFT )
-        mMoveScale /= 10;
+        mMoveScale /= 1000;
 
     if ( e.key == OIS::KC_A || e.key == OIS::KC_D )
         mSideMoving = 0.0f;

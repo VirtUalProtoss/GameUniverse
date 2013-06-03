@@ -27,4 +27,12 @@ class ogreApplication {
 		frameListener* mFrameLst;
         
         CEGUI::OgreRenderer* myRenderer;
+        
+    protected:
+        Ogre::Real parsek; //= 3.08567758E16;
+        Ogre::Real ligthYear; //= 9.46073047E15;
+        Ogre::Real milkyWayDiameter; // = 100000 * ligthYear;
+        Ogre::Real AE;
+        Ogre::Real solSystemDiameter;
+        Ogre::SceneNode* mCameraNode;
 };

@@ -2,6 +2,8 @@
 #define _FRAME_LISTENER_
 
 #include <Ogre.h>
+//#include <OgreStringConverter.h>
+//#include <OgrePrerequisites.h>
 #include <OIS.h>
 #include <CEGUI.h>
 #include <CEGUIRenderer.h>
@@ -11,6 +13,8 @@
 #include "mouseListener.h"
 #include "joyListener.h"
 #include "myWindowEventListener.h"
+
+#include <cstdio>
 
 
 class frameListener : public Ogre::FrameListener, public keyListener, public mouseListener, public joyListener {
@@ -23,6 +27,9 @@ class frameListener : public Ogre::FrameListener, public keyListener, public mou
         void windowClosed( Ogre::RenderWindow* rw );
         void initCEGUI();
         void moveCamera();
+        void showDebugOverlay(bool show);
+        void updateStats();
+        bool frameEnded(const Ogre::FrameEvent& evt);
  
     private:
         Ogre::Real mTime;
@@ -38,6 +45,8 @@ class frameListener : public Ogre::FrameListener, public keyListener, public mou
         // just to stop toggles flipping too fast
         Ogre::Real mTimeUntilNextToggle ;
         Ogre::Real mCurrentSpeed;
+        Ogre::Overlay* mDebugOverlay;
+        Ogre::String mDebugText;
 };
 
 #endif // _FRAME_LISTENER_
